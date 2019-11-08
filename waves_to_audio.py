@@ -1,9 +1,8 @@
 # Following a guide at https://zach.se/generate-audio-with-python/
 import gen_waves
 import itertools 
-
-channels = ((gen_waves.sine_wave(440.0),),
-            (gen_waves.sine_wave(440.0),))
+import wave
+import struct
 
 waves = (gen_waves.sine_wave(440.0), gen_waves.sine_wave(440.0))
 
@@ -16,13 +15,16 @@ def compute_samples(waves, nsamples=None):
     summed_waves = map(sum, zip(*waves))
     return itertools.islice(summed_waves, nsamples)
 
+samples = compute_samples(waves)
 
-def compute_samples_2(channels, nsamples=None):
-    one = (map(sum, zip(*channel)) for channel in channels)
-    print(next(one))
-    return itertools.islice(zip(*one), nsamples)
-    return itertools.islice(zip(*(map(sum, zip(*channel)) for channel in channels)), nsamples)
+sampwidth = 2 # size of sample in bytes - we have 16 bit audio 
+framerate = 44100 
+duration = 5 # in seconds
+nframes = framerate * duration
+w = wave.open('audio.wav', 'w')
+w.setparams((1, sampwidth, framerate, nframes, 'NONE', 'not compressed'))
 
-#compute_samples((gen_waves.sine_wave(), gen_waves.sine_wave()), 100)
-#compute_samples_2(channels)
-compute_samples(waves)
+max_amplitude = 32767.0 
+samples = (int(sample * max_amplitude) for sample in samples)
+
+struct.pack('h', 1000)
