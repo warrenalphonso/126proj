@@ -9,7 +9,7 @@ PyAudio = pyaudio.PyAudio     #initialize pyaudio
 BITRATE = 16000     #number of frames per second/frameset.      
 
 FREQUENCY = 2000     #Hz, waves per second, 261.63=C4-note.
-LENGTH = 1     #seconds to play sound
+LENGTH = .1     #seconds to play sound
 
 if FREQUENCY > BITRATE:
     BITRATE = FREQUENCY+100
@@ -18,7 +18,7 @@ NUMBEROFFRAMES = int(BITRATE * LENGTH)
 RESTFRAMES = NUMBEROFFRAMES % BITRATE
 WAVEDATA = ''    
 
-#generating wawes
+#generating waves
 for x in range(NUMBEROFFRAMES):
  WAVEDATA = WAVEDATA+chr(int(math.sin(x/((BITRATE/FREQUENCY)/math.pi))*127+128))    
 
@@ -35,4 +35,3 @@ stream.write(WAVEDATA)
 stream.stop_stream()
 stream.close()
 p.terminate()
-
