@@ -16,3 +16,4 @@ print('Done recording')
 write('test_output.wav', fs, myrecording)
 
 # Make sure when you do `python -m sounddevice` or `sd.query_devices()`, you're connected to both *in* and *out* channels. 
+
