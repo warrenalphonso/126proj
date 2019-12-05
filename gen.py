@@ -40,7 +40,7 @@ for b in bin_contents:
         print(b)    
     
     waveform = np.sin(2 * np.pi * freq * np.arange(t * fs) / fs) 
-    waveform_ints = np.int16(waveform * 128)
+    waveform_ints = np.int16(waveform * 32767)
     wave = np.append(wave, waveform_ints)
 
 print(np.shape(wave))
