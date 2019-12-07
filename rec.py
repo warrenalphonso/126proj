@@ -16,3 +16,7 @@ print('Done recording')
 write('test_output3chan1.wav', fs, myrecording)
 
 # Make sure when you do `python -m sounddevice` or `sd.query_devices()`, you're connected to both *in* and *out* channels. 
+<<<<<<< HEAD
+=======
+
+>>>>>>> f02b61f6841b45acb80a46f564ab01c9d23a764a
